@@ -1,0 +1,17 @@
+syntax = "proto3";
+package pb;
+option go_package = "github.com/MobileStore-Grpc/search-product/pb";
+import "filter_message.proto";
+import "mobile_message.proto";
+import "google/api/annotations.proto";
+
+message SearchMobileRequest { Filter filter = 1; }
+message SearchMobileResponse { Mobile mobile = 1; }
+
+service SearchService {
+  rpc SearchMobile(SearchMobileRequest) returns (stream SearchMobileResponse) {
+    option (google.api.http) = {
+      get : "/v1/mobile/search"
+    };
+  };
+}
